@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": { "name": "Track", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get multiple tracks", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track?ids=",
+            "params": [
+              { "name": "ids", "value": "", "type": "query", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple tracks by ReccoBeats or Spotify IDs."
+        },
+        {
+          "info": { "name": "Get track detail", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the track." }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single track."
+        },
+        {
+          "info": { "name": "Get track's audio features", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/:id/audio-features",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the track." }
+            ]
+          },
+          "docs": "Get the Spotify-style audio features for a catalog track."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Recommendation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Track recommendation", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/recommendation?seeds=&size=10",
+            "params": [
+              { "name": "seeds", "value": "", "type": "query", "description": "Comma-separated seed IDs (track/artist/album)." },
+              { "name": "size", "value": "10", "type": "query", "description": "Number of recommendations to return." }
+            ]
+          },
+          "docs": "Generate track recommendations from seed tracks, artists, or albums."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Audio Analysis", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Extract audio features", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.reccobeats.com/v1/analysis/audio-features",
+            "body": { "type": "formdata", "data": [
+              { "name": "audioFile", "type": "file", "description": "Audio file to analyze (MP3, OGG, WAV, AIFF; max 5 MB; first 30s analyzed)." }
+            ] }
+          },
+          "docs": "Extract audio features directly from an uploaded audio file."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Artist", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get multiple artists", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist?ids=",
+            "params": [
+              { "name": "ids", "value": "", "type": "query", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple artists."
+        },
+        {
+          "info": { "name": "Search artist", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/search?searchText=&size=20&page=0",
+            "params": [
+              { "name": "searchText", "value": "", "type": "query", "description": "Artist name to search for." },
+              { "name": "size", "value": "20", "type": "query" },
+              { "name": "page", "value": "0", "type": "query" }
+            ]
+          },
+          "docs": "Search the ReccoBeats database for artists by name."
+        },
+        {
+          "info": { "name": "Get artist detail", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the artist." }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single artist."
+        },
+        {
+          "info": { "name": "Get artist's albums", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id/album",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the artist." }
+            ]
+          },
+          "docs": "List the albums for a given artist."
+        },
+        {
+          "info": { "name": "Get artist's tracks", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id/track",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the artist." }
+            ]
+          },
+          "docs": "List the tracks for a given artist."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Album", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get multiple albums", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album?ids=",
+            "params": [
+              { "name": "ids", "value": "", "type": "query", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple albums."
+        },
+        {
+          "info": { "name": "Search album", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/search?searchText=&size=20&page=0",
+            "params": [
+              { "name": "searchText", "value": "", "type": "query", "description": "Album title to search for." },
+              { "name": "size", "value": "20", "type": "query" },
+              { "name": "page", "value": "0", "type": "query" }
+            ]
+          },
+          "docs": "Search the ReccoBeats database for albums by title."
+        },
+        {
+          "info": { "name": "Get album detail", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the album." }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single album."
+        },
+        {
+          "info": { "name": "Get album's tracks", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/:id/track",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The ReccoBeats UUID of the album." }
+            ]
+          },
+          "docs": "List the tracks on a given album."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

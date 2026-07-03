@@ -1,0 +1,62 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ReccoBeats
+providerId: reccobeats
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Music
+- Recommendations
+- Audio Features
+- Free
+- Plans
+description: >-
+  ReccoBeats publishes no paid pricing. The ReccoBeats API is described as
+  completely free to use, with no subscription, no cost barriers, and no API
+  key or authentication required. Usage is governed by internal, undisclosed
+  rate limits rather than by a metered or tiered plan. There is a single,
+  free-of-charge access model covering all endpoints (track, artist, album,
+  audio features, audio-file analysis, and recommendations).
+notes: >-
+  No paid tiers, quotas, or contractual plans are documented as of the review
+  date. The only stated constraints are the audio-analysis file limits (5 MB,
+  30 seconds analyzed) and internal rate limits (HTTP 429 with Retry-After).
+  ReccoBeats also markets a separate desktop application (Lowkey Audio Engine)
+  for offline analysis, which is out of scope for this API plan. Re-check the
+  documentation for any future introduction of paid tiers.
+sources:
+- https://reccobeats.com/
+- https://reccobeats.com/docs/documentation/introduction
+- https://reccobeats.com/docs/documentation/rate-limiting
+plans:
+- id: reccobeats-free
+  name: Free
+  type: free
+  description: >-
+    Free, keyless access to the entire ReccoBeats API - track, artist, and
+    album metadata, catalog audio features, audio-file feature extraction, and
+    track recommendations. No authentication and no published usage charges;
+    throughput is bounded only by ReccoBeats' internal rate limits.
+  entries:
+  - label: API Requests
+    name: api_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (no published charge; internal rate limits apply)
+    userMultiplied: false
+  elements:
+  - name: Track Metadata
+  - name: Artist and Album Metadata
+  - name: Catalog Audio Features
+  - name: Audio File Feature Extraction
+  - name: Track Recommendations
+  - name: No API Key Required
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

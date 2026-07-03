@@ -1,0 +1,117 @@
+aid: reccobeats
+name: ReccoBeats
+review:
+  question: Does ReccoBeats expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. ReccoBeats' entire public surface is a
+    request/response REST API over HTTPS (base https://api.reccobeats.com/v1).
+    There is no server-push transport - no WebSocket (ws:// or wss://) and no
+    Server-Sent Events - documented anywhere in the ReccoBeats docs. Track,
+    artist, album, audio-feature, audio-analysis, and recommendation calls are
+    all synchronous HTTP GET/POST, so there is nothing event-driven to model in
+    an AsyncAPI document.
+findings:
+  summary: |
+    ReccoBeats does not publish a documented public WebSocket API. ReccoBeats is
+    a free music recommendation and database service. Its API is pure
+    request/response REST over HTTPS at base https://api.reccobeats.com/v1 and
+    requires no API key or authentication. Endpoints cover track/artist/album
+    metadata lookup (by ReccoBeats UUID or Spotify ID), Spotify-style audio
+    features (either for a catalog track by ID via GET, or extracted from an
+    uploaded audio file via a multipart POST), and track recommendations from
+    seed tracks/artists/albums. No realtime, bidirectional, or streaming
+    WebSocket endpoint is documented on ReccoBeats' API.
+  openSource: |
+    ReccoBeats is a hosted, closed service - there is no published open-source
+    server or self-hostable engine. The company also markets a separate desktop
+    application (Lowkey Audio Engine) for offline analysis, which is out of scope
+    for this API review. Numerous third-party client libraries and integrations
+    exist on GitHub (e.g. the taylor R package and the MMAudioFeatures MediaMonkey
+    addon), but there is no official ReccoBeats GitHub organization or LinkedIn
+    company page confirmed as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.reccobeats.com/v1
+      documented: true
+      note: All ReccoBeats endpoints (track, artist, album, audio features, audio analysis, recommendation) are synchronous REST over HTTPS.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the ReccoBeats API docs as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events or other server-push transport is documented.
+  authentication: |
+    None. The documentation states no API access key or authentication is
+    required. Rate limits are enforced internally (undisclosed thresholds) and
+    return HTTP 429 with a Retry-After header when exceeded.
+  endpointsConfirmedRest:
+    - GET    https://api.reccobeats.com/v1/track
+    - GET    https://api.reccobeats.com/v1/track/{id}
+    - GET    https://api.reccobeats.com/v1/track/{id}/audio-features
+    - GET    https://api.reccobeats.com/v1/track/recommendation
+    - POST   https://api.reccobeats.com/v1/analysis/audio-features
+    - GET    https://api.reccobeats.com/v1/artist
+    - GET    https://api.reccobeats.com/v1/artist/search
+    - GET    https://api.reccobeats.com/v1/artist/{id}
+    - GET    https://api.reccobeats.com/v1/artist/{id}/album
+    - GET    https://api.reccobeats.com/v1/artist/{id}/track
+    - GET    https://api.reccobeats.com/v1/album
+    - GET    https://api.reccobeats.com/v1/album/search
+    - GET    https://api.reccobeats.com/v1/album/{id}
+    - GET    https://api.reccobeats.com/v1/album/{id}/track
+  endpointsModeled:
+    - note: >-
+        The GET /v1/track/recommendation endpoint is confirmed to exist and to
+        accept seeds and size parameters. The optional per-feature target
+        parameters (acousticness, danceability, energy, instrumentalness,
+        liveness, speechiness, tempo, valence) modeled in the OpenAPI are
+        inferred from ReccoBeats' Spotify-recommendation-compatible design and
+        are not individually confirmed in the public docs.
+    - note: >-
+        Response schemas (Track, Artist, Album, AudioFeatures) are modeled from
+        the documented audio-features example and Spotify-compatible resource
+        conventions; the audio-features field set is confirmed, other resource
+        fields are representative.
+sources:
+  - url: https://reccobeats.com/
+    type: Website
+    note: Free music recommendation and database API; no pricing; no auth.
+  - url: https://reccobeats.com/docs/documentation/introduction
+    type: Documentation
+    note: Base URL https://api.reccobeats.com; no API key or authentication required; rate limiting referenced.
+  - url: https://reccobeats.com/docs/apis/reccobeats-api
+    type: APIReference
+    note: API reference index listing track, artist, album, analysis, and recommendation endpoints.
+  - url: https://reccobeats.com/docs/apis/get-track-audio-features
+    type: APIReference
+    note: GET /v1/track/{id}/audio-features - Spotify-style audio features for a catalog track.
+  - url: https://reccobeats.com/docs/apis/extract-audio-features
+    type: APIReference
+    note: POST /v1/analysis/audio-features - multipart audio-file feature extraction.
+  - url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+    type: Documentation
+    note: File constraints (5 MB, 30s, MP3/OGG/WAV/AIFF) and the nine-feature response schema.
+  - url: https://reccobeats.com/docs/apis/get-recommendation
+    type: APIReference
+    note: GET /v1/track/recommendation - recommendations from seeds with a size parameter.
+  - url: https://reccobeats.com/docs/documentation/Resources/resource-id
+    type: Documentation
+    note: Resources addressed by ReccoBeats UUID (v4) or Spotify Base-62 ID; seeds accept both.
+  - url: https://reccobeats.com/docs/documentation/rate-limiting
+    type: Documentation
+    note: Internal rate limits; 429 Too Many Requests with a Retry-After header.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push protocol surface exists. ReccoBeats' entire
+    public API is request/response REST over HTTPS. No AsyncAPI document was
+    created because there is no event-driven or streaming transport on the
+    ReccoBeats API to model.

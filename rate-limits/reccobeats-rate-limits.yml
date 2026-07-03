@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ReccoBeats
+providerId: reccobeats
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Music
+- Recommendations
+- Audio Features
+- Rate Limiting
+- Quotas
+description: >-
+  ReccoBeats enforces rate limits to ensure fair usage and prevent abuse, but
+  the exact numeric thresholds are configured internally and are not published.
+  When a client exceeds the limit, the API responds with HTTP 429 Too Many
+  Requests and includes a Retry-After header indicating how long to wait before
+  retrying. In addition, the audio-file analysis endpoint enforces hard input
+  constraints: uploads are capped at 5 MB and only the first 30 seconds of audio
+  are analyzed, with a recommended 44,100 Hz sampling rate.
+notes: >-
+  No requests-per-second/minute figures, and no statement of whether limits are
+  per-IP or per-account, are documented as of the review date. Clients should
+  honor the Retry-After header and implement exponential backoff with jitter on
+  429 responses.
+sources:
+- https://reccobeats.com/docs/documentation/rate-limiting
+- https://reccobeats.com/docs/documentation/introduction
+- https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: client
+  metric: requests
+  limit: not published
+  notes: Internal rate limit; exact threshold not disclosed. Returns 429 with Retry-After when exceeded.
+- name: Audio Upload Size
+  scope: request
+  metric: bytes
+  limit: 5242880
+  notes: Audio-file analysis uploads are capped at 5 MB.
+- name: Audio Analysis Duration
+  scope: request
+  metric: seconds
+  limit: 30
+  notes: Only the first 30 seconds of an uploaded audio file are analyzed; longer audio is truncated.
+policies:
+- name: Retry-After
+  description: On a 429 response, inspect the Retry-After header to determine how long to wait before the next request.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Fair Use
+  description: Rate limits exist to ensure fair usage and prevent abuse of the free, keyless API.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

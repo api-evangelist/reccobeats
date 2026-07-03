@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "ReccoBeats API",
+    "description": "Free, keyless music recommendation and database API. Track/artist/album metadata, Spotify-style audio features (by catalog ID or extracted from an uploaded audio file), and track recommendations from seeds. Base URL: https://api.reccobeats.com/v1. No authentication required. Resources are addressed by ReccoBeats UUID or Spotify ID. Internal rate limits apply (HTTP 429 with Retry-After).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.reccobeats.com/v1", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Track",
+      "item": [
+        {
+          "name": "Get multiple tracks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/track?ids=", "host": ["{{baseUrl}}"], "path": ["track"], "query": [{ "key": "ids", "value": "", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }] },
+            "description": "Retrieve metadata for multiple tracks by ReccoBeats or Spotify IDs."
+          }
+        },
+        {
+          "name": "Get track detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/track/:id", "host": ["{{baseUrl}}"], "path": ["track", ":id"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the track." }] },
+            "description": "Retrieve detailed metadata for a single track."
+          }
+        },
+        {
+          "name": "Get track's audio features",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/track/:id/audio-features", "host": ["{{baseUrl}}"], "path": ["track", ":id", "audio-features"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the track." }] },
+            "description": "Get the Spotify-style audio features for a catalog track."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recommendation",
+      "item": [
+        {
+          "name": "Track recommendation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/track/recommendation?seeds=&size=10", "host": ["{{baseUrl}}"], "path": ["track", "recommendation"], "query": [{ "key": "seeds", "value": "", "description": "Comma-separated seed IDs (track/artist/album)." }, { "key": "size", "value": "10", "description": "Number of recommendations to return." }] },
+            "description": "Generate track recommendations from seed tracks, artists, or albums."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audio Analysis",
+      "item": [
+        {
+          "name": "Extract audio features",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "audioFile", "type": "file", "src": [], "description": "Audio file to analyze (MP3, OGG, WAV, AIFF; max 5 MB; first 30s analyzed)." }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/analysis/audio-features", "host": ["{{baseUrl}}"], "path": ["analysis", "audio-features"] },
+            "description": "Extract audio features directly from an uploaded audio file."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Artist",
+      "item": [
+        {
+          "name": "Get multiple artists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/artist?ids=", "host": ["{{baseUrl}}"], "path": ["artist"], "query": [{ "key": "ids", "value": "", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }] },
+            "description": "Retrieve metadata for multiple artists."
+          }
+        },
+        {
+          "name": "Search artist",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/artist/search?searchText=&size=20&page=0", "host": ["{{baseUrl}}"], "path": ["artist", "search"], "query": [{ "key": "searchText", "value": "", "description": "Artist name to search for." }, { "key": "size", "value": "20" }, { "key": "page", "value": "0" }] },
+            "description": "Search the ReccoBeats database for artists by name."
+          }
+        },
+        {
+          "name": "Get artist detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/artist/:id", "host": ["{{baseUrl}}"], "path": ["artist", ":id"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the artist." }] },
+            "description": "Retrieve detailed metadata for a single artist."
+          }
+        },
+        {
+          "name": "Get artist's albums",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/artist/:id/album", "host": ["{{baseUrl}}"], "path": ["artist", ":id", "album"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the artist." }] },
+            "description": "List the albums for a given artist."
+          }
+        },
+        {
+          "name": "Get artist's tracks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/artist/:id/track", "host": ["{{baseUrl}}"], "path": ["artist", ":id", "track"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the artist." }] },
+            "description": "List the tracks for a given artist."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Album",
+      "item": [
+        {
+          "name": "Get multiple albums",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/album?ids=", "host": ["{{baseUrl}}"], "path": ["album"], "query": [{ "key": "ids", "value": "", "description": "Comma-separated ReccoBeats UUIDs or Spotify IDs." }] },
+            "description": "Retrieve metadata for multiple albums."
+          }
+        },
+        {
+          "name": "Search album",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/album/search?searchText=&size=20&page=0", "host": ["{{baseUrl}}"], "path": ["album", "search"], "query": [{ "key": "searchText", "value": "", "description": "Album title to search for." }, { "key": "size", "value": "20" }, { "key": "page", "value": "0" }] },
+            "description": "Search the ReccoBeats database for albums by title."
+          }
+        },
+        {
+          "name": "Get album detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/album/:id", "host": ["{{baseUrl}}"], "path": ["album", ":id"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the album." }] },
+            "description": "Retrieve detailed metadata for a single album."
+          }
+        },
+        {
+          "name": "Get album's tracks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/album/:id/track", "host": ["{{baseUrl}}"], "path": ["album", ":id", "track"], "variable": [{ "key": "id", "value": "", "description": "The ReccoBeats UUID of the album." }] },
+            "description": "List the tracks on a given album."
+          }
+        }
+      ]
+    }
+  ]
+}

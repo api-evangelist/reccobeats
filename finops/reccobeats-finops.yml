@@ -1,0 +1,85 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ReccoBeats
+providerId: reccobeats
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Music
+- Recommendations
+- Audio Features
+- Free
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of ReccoBeats spend. There is effectively nothing to manage on the
+  vendor-invoice side: the ReccoBeats API is completely free to use, requires no
+  API key, and publishes no metered or tiered pricing. There is no direct cost of
+  consumption. The only cost-relevant considerations are indirect - the
+  engineering effort to integrate, the internal (undisclosed) rate limits that
+  cap throughput, and any client-side compute for preparing audio files for the
+  analysis endpoint. Because there is no billing relationship, standard FOCUS
+  cost columns carry zero charges.
+notes: >-
+  No usage-based charges, subscriptions, or contracts are documented as of the
+  review date. Should ReccoBeats introduce paid tiers in the future, revisit
+  this document to model the metered dimensions (likely requests and/or audio
+  analysis operations). Treat availability as best-effort given the free,
+  keyless model with internal rate limits.
+sources:
+- https://reccobeats.com/
+- https://reccobeats.com/docs/documentation/introduction
+- https://reccobeats.com/docs/documentation/rate-limiting
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: ReccoBeats
+serviceCategory: Machine Learning and Media
+billingModel:
+  pricingCategory: Free
+  billingFrequency: None
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+focusColumns:
+  ServiceName: ReccoBeats API
+  ServiceCategory: Machine Learning and Media
+  ProviderName: ReccoBeats
+  PublisherName: ReccoBeats
+  InvoiceIssuerName: ReccoBeats
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Free
+meters:
+- name: api_requests
+  description: Calls to any ReccoBeats endpoint. Free of charge; bounded only by internal rate limits.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - client
+  - endpoint
+- name: audio_analysis
+  description: Audio-file feature extraction operations (POST /v1/analysis/audio-features). Free of charge.
+  unit: operations
+  aggregation: sum
+  dimensions:
+  - client
+principles:
+- name: Visibility
+  description: Track request volume per endpoint to stay within ReccoBeats' internal rate limits, even though there is no invoice.
+- name: Allocation
+  description: Attribute API usage to the internal feature or team consuming it, so throughput needs are understood.
+- name: Optimization
+  description: Batch lookups via the multiple-track/artist/album endpoints, cache audio features for catalog tracks, and pre-trim audio to 30 seconds / 5 MB before calling the analysis endpoint.
+- name: Accountability
+  description: Because access is free and keyless, accountability centers on respecting fair-use rate limits and honoring Retry-After rather than on managing spend.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
