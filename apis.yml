@@ -161,6 +161,10 @@ apis:
     IDs can seed recommendations and resolve to their constituent tracks for
     audio-feature analysis.
 common:
+- type: DomainSecurity
+  url: security/reccobeats-domain-security.yml
+- url: https://reccobeats.com/blog/rss.xml
+  type: Blog
 - type: Website
   url: https://reccobeats.com
 - type: Documentation
