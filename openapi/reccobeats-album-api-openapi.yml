@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: ReccoBeats Album API
+  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  version: '1.0'
+  contact:
+    name: ReccoBeats
+    url: https://reccobeats.com
+servers:
+- url: https://api.reccobeats.com/v1
+  description: ReccoBeats production API
+tags:
+- name: Album
+  description: Album metadata and tracklists.
+paths:
+  /album:
+    get:
+      operationId: getAlbums
+      tags:
+      - Album
+      summary: Get multiple albums
+      description: Retrieve metadata for multiple albums in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter.
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        description: Comma-separated list of ReccoBeats UUIDs or Spotify IDs.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of albums.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Album'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /album/search:
+    get:
+      operationId: searchAlbums
+      tags:
+      - Album
+      summary: Search album
+      description: Search the ReccoBeats database for albums by title.
+      parameters:
+      - name: searchText
+        in: query
+        required: true
+        description: The album title (or partial title) to search for.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Matching albums.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Album'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /album/{id}:
+    get:
+      operationId: getAlbumById
+      tags:
+      - Album
+      summary: Get album detail
+      description: Retrieve detailed metadata for a single album by ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      responses:
+        '200':
+          description: The requested album.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /album/{id}/track:
+    get:
+      operationId: getAlbumTracks
+      tags:
+      - Album
+      summary: Get album's tracks
+      description: List the tracks on a given album, identified by ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/AlbumId'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: The album's tracks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Track'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    Artist:
+      type: object
+      description: An artist in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the artist.
+        name:
+          type: string
+        href:
+          type: string
+    Album:
+      type: object
+      description: An album in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the album.
+        albumTitle:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        releaseDate:
+          type: string
+        href:
+          type: string
+    Track:
+      type: object
+      description: A track in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the track.
+        trackTitle:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        durationMs:
+          type: integer
+        isrc:
+          type: string
+        ean:
+          type: string
+        upc:
+          type: string
+        href:
+          type: string
+        availableCountries:
+          type: string
+        popularity:
+          type: integer
+  parameters:
+    AlbumId:
+      name: id
+      in: path
+      required: true
+      description: The ReccoBeats UUID of the album.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Zero-based page index.
+      schema:
+        type: integer
+        default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 20
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.

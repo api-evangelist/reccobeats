@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: ReccoBeats Album Recommendation API
+  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  version: '1.0'
+  contact:
+    name: ReccoBeats
+    url: https://reccobeats.com
+servers:
+- url: https://api.reccobeats.com/v1
+  description: ReccoBeats production API
+tags:
+- name: Recommendation
+  description: Track recommendations generated from seeds.
+paths:
+  /track/recommendation:
+    get:
+      operationId: getRecommendation
+      tags:
+      - Recommendation
+      summary: Track recommendation
+      description: Generate track recommendations from one or more seeds (track, artist, or album IDs). The engine clusters songs, artists, and audio features and returns tracks whose characteristics best match the seeds. Optional audio-feature target parameters can be supplied to steer the results toward a desired sound and mood.
+      parameters:
+      - name: seeds
+        in: query
+        required: true
+        description: Comma-separated list of seed IDs (ReccoBeats UUIDs or Spotify IDs) for tracks, artists, or albums.
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        description: Number of recommended tracks to return.
+        schema:
+          type: integer
+          default: 10
+      - name: acousticness
+        in: query
+        required: false
+        description: Target acousticness (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: danceability
+        in: query
+        required: false
+        description: Target danceability (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: energy
+        in: query
+        required: false
+        description: Target energy (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: instrumentalness
+        in: query
+        required: false
+        description: Target instrumentalness (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: liveness
+        in: query
+        required: false
+        description: Target liveness (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: speechiness
+        in: query
+        required: false
+        description: Target speechiness (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: tempo
+        in: query
+        required: false
+        description: Target tempo in BPM to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      - name: valence
+        in: query
+        required: false
+        description: Target valence (0.0-1.0) to steer recommendations. Modeled.
+        schema:
+          type: number
+          format: float
+      responses:
+        '200':
+          description: A list of recommended tracks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Track'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    Track:
+      type: object
+      description: A track in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the track.
+        trackTitle:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        durationMs:
+          type: integer
+        isrc:
+          type: string
+        ean:
+          type: string
+        upc:
+          type: string
+        href:
+          type: string
+        availableCountries:
+          type: string
+        popularity:
+          type: integer
+    Artist:
+      type: object
+      description: An artist in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the artist.
+        name:
+          type: string
+        href:
+          type: string
+  responses:
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.

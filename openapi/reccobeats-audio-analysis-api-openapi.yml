@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: ReccoBeats Album Audio Analysis API
+  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  version: '1.0'
+  contact:
+    name: ReccoBeats
+    url: https://reccobeats.com
+servers:
+- url: https://api.reccobeats.com/v1
+  description: ReccoBeats production API
+tags:
+- name: Audio Analysis
+  description: Extract audio features directly from an uploaded audio file.
+paths:
+  /analysis/audio-features:
+    post:
+      operationId: extractAudioFeatures
+      tags:
+      - Audio Analysis
+      summary: Extract audio features
+      description: Extract audio features directly from an uploaded audio file. The file is sent as multipart/form-data. Supported formats are MP3, OGG/Vorbis, AIFF/AIFC, and WAV, up to 5 MB; only the first 30 seconds are analyzed and a 44,100 Hz sampling rate is recommended.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - audioFile
+              properties:
+                audioFile:
+                  type: string
+                  format: binary
+                  description: The audio file to analyze (MP3, OGG, WAV, AIFF; max 5 MB).
+      responses:
+        '200':
+          description: The extracted audio features.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioFeatures'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  responses:
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
+  schemas:
+    AudioFeatures:
+      type: object
+      description: Spotify-style audio features describing a track's sound and mood. Values are numeric; the 0.0-1.0 measures are confidence/intensity scores.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID of the analyzed track (omitted for file uploads).
+        acousticness:
+          type: number
+          format: float
+          description: Confidence (0.0-1.0) that the track is acoustic.
+        danceability:
+          type: number
+          format: float
+          description: How suitable the track is for dancing (0.0-1.0).
+        energy:
+          type: number
+          format: float
+          description: Perceptual intensity and activity (0.0-1.0).
+        instrumentalness:
+          type: number
+          format: float
+          description: Likelihood the track has no vocals (0.0-1.0).
+        liveness:
+          type: number
+          format: float
+          description: Presence of a live audience (0.0-1.0).
+        loudness:
+          type: number
+          format: float
+          description: Overall loudness in decibels (typically -60 to 0 dB).
+        speechiness:
+          type: number
+          format: float
+          description: Presence of spoken words (0.0-1.0).
+        tempo:
+          type: number
+          format: float
+          description: Estimated tempo in beats per minute.
+        valence:
+          type: number
+          format: float
+          description: Musical positivity / happiness (0.0-1.0).

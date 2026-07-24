@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: ReccoBeats Album Audio Features API
+  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  version: '1.0'
+  contact:
+    name: ReccoBeats
+    url: https://reccobeats.com
+servers:
+- url: https://api.reccobeats.com/v1
+  description: ReccoBeats production API
+tags:
+- name: Audio Features
+  description: Spotify-style audio features for a catalog track.
+paths:
+  /track/{id}/audio-features:
+    get:
+      operationId: getTrackAudioFeatures
+      tags:
+      - Audio Features
+      summary: Get track's audio features
+      description: Retrieve the Spotify-style audio features for a catalog track by its ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/TrackId'
+      responses:
+        '200':
+          description: The audio features for the track.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioFeatures'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    AudioFeatures:
+      type: object
+      description: Spotify-style audio features describing a track's sound and mood. Values are numeric; the 0.0-1.0 measures are confidence/intensity scores.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID of the analyzed track (omitted for file uploads).
+        acousticness:
+          type: number
+          format: float
+          description: Confidence (0.0-1.0) that the track is acoustic.
+        danceability:
+          type: number
+          format: float
+          description: How suitable the track is for dancing (0.0-1.0).
+        energy:
+          type: number
+          format: float
+          description: Perceptual intensity and activity (0.0-1.0).
+        instrumentalness:
+          type: number
+          format: float
+          description: Likelihood the track has no vocals (0.0-1.0).
+        liveness:
+          type: number
+          format: float
+          description: Presence of a live audience (0.0-1.0).
+        loudness:
+          type: number
+          format: float
+          description: Overall loudness in decibels (typically -60 to 0 dB).
+        speechiness:
+          type: number
+          format: float
+          description: Presence of spoken words (0.0-1.0).
+        tempo:
+          type: number
+          format: float
+          description: Estimated tempo in beats per minute.
+        valence:
+          type: number
+          format: float
+          description: Musical positivity / happiness (0.0-1.0).
+  parameters:
+    TrackId:
+      name: id
+      in: path
+      required: true
+      description: The ReccoBeats UUID of the track.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.

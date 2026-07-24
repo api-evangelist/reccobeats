@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: ReccoBeats Album Artist API
+  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  version: '1.0'
+  contact:
+    name: ReccoBeats
+    url: https://reccobeats.com
+servers:
+- url: https://api.reccobeats.com/v1
+  description: ReccoBeats production API
+tags:
+- name: Artist
+  description: Artist metadata and discography.
+paths:
+  /artist:
+    get:
+      operationId: getArtists
+      tags:
+      - Artist
+      summary: Get multiple artists
+      description: Retrieve metadata for multiple artists in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter.
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        description: Comma-separated list of ReccoBeats UUIDs or Spotify IDs.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of artists.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Artist'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /artist/search:
+    get:
+      operationId: searchArtists
+      tags:
+      - Artist
+      summary: Search artist
+      description: Search the ReccoBeats database for artists by name.
+      parameters:
+      - name: searchText
+        in: query
+        required: true
+        description: The artist name (or partial name) to search for.
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        description: Number of results per page.
+        schema:
+          type: integer
+          default: 20
+      - name: page
+        in: query
+        required: false
+        description: Zero-based page index.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Matching artists.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Artist'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /artist/{id}:
+    get:
+      operationId: getArtistById
+      tags:
+      - Artist
+      summary: Get artist detail
+      description: Retrieve detailed metadata for a single artist by ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/ArtistId'
+      responses:
+        '200':
+          description: The requested artist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /artist/{id}/album:
+    get:
+      operationId: getArtistAlbums
+      tags:
+      - Artist
+      summary: Get artist's albums
+      description: List the albums for a given artist, identified by ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/ArtistId'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: The artist's albums.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Album'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /artist/{id}/track:
+    get:
+      operationId: getArtistTracks
+      tags:
+      - Artist
+      summary: Get artist's tracks
+      description: List the tracks for a given artist, identified by ReccoBeats UUID.
+      parameters:
+      - $ref: '#/components/parameters/ArtistId'
+      - $ref: '#/components/parameters/Size'
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: The artist's tracks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Track'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    Artist:
+      type: object
+      description: An artist in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the artist.
+        name:
+          type: string
+        href:
+          type: string
+    Album:
+      type: object
+      description: An album in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the album.
+        albumTitle:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        releaseDate:
+          type: string
+        href:
+          type: string
+    Track:
+      type: object
+      description: A track in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the track.
+        trackTitle:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        durationMs:
+          type: integer
+        isrc:
+          type: string
+        ean:
+          type: string
+        upc:
+          type: string
+        href:
+          type: string
+        availableCountries:
+          type: string
+        popularity:
+          type: integer
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Zero-based page index.
+      schema:
+        type: integer
+        default: 0
+    ArtistId:
+      name: id
+      in: path
+      required: true
+      description: The ReccoBeats UUID of the artist.
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 20
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
