@@ -10,7 +10,19 @@ description: ReccoBeats is a free music recommendation and database API service.
   speechiness, tempo, and valence - either for a catalog track by ID or directly
   from an uploaded audio file. Resources can be addressed by ReccoBeats UUID or by
   Spotify ID, and the API requires no API key or authentication.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reccobeats.png
 tags:
 - Music
 - Recommendations
@@ -22,144 +34,186 @@ created: '2026-07-03'
 modified: '2026-07-03'
 specificationVersion: '0.19'
 apis:
-- aid: reccobeats:reccobeats-track-api
-  name: ReccoBeats Track API
-  tags:
-  - Tracks
-  - Metadata
-  - Music Database
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
-  baseURL: https://api.reccobeats.com/v1
-  properties:
-  - url: https://reccobeats.com/docs/documentation/introduction
-    type: Documentation
-  - url: https://reccobeats.com/docs/apis/get-track-by-id
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Retrieve track metadata from the ReccoBeats music database - fetch a
-    single track by its ReccoBeats UUID, or look up multiple tracks in one request
-    by ReccoBeats or Spotify IDs. Tracks are the primary resource used as seeds for
-    recommendations and as the subject of audio-feature lookups.
-- aid: reccobeats:reccobeats-audio-features-api
-  name: ReccoBeats Audio Features API
-  tags:
-  - Audio Features
-  - Danceability
-  - Energy
-  - Valence
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/apis/get-track-audio-features
-  baseURL: https://api.reccobeats.com/v1
-  properties:
-  - url: https://reccobeats.com/docs/apis/get-track-audio-features
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Get the Spotify-style audio features for a catalog track by ID -
-    acousticness, danceability, energy, instrumentalness, liveness, loudness,
-    speechiness, tempo, and valence - as numeric characteristics describing the
-    track's sound and mood. A drop-in alternative to Spotify's deprecated audio
-    features endpoint.
-- aid: reccobeats:reccobeats-audio-analysis-api
-  name: ReccoBeats Audio Analysis API
-  tags:
-  - Audio Analysis
-  - Feature Extraction
-  - File Upload
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
-  baseURL: https://api.reccobeats.com/v1
-  properties:
-  - url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
-    type: Documentation
-  - url: https://reccobeats.com/docs/apis/extract-audio-features
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Extract audio features directly from an uploaded audio file (MP3, OGG,
-    WAV, AIFF; up to 5 MB, first 30 seconds analyzed) via a multipart POST. Returns
-    the same nine-dimension feature vector as the catalog audio-features endpoint,
-    for tracks that are not in the ReccoBeats database.
-- aid: reccobeats:reccobeats-recommendation-api
-  name: ReccoBeats Recommendation API
-  tags:
-  - Recommendations
-  - Seeds
-  - Discovery
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/apis/get-recommendation
-  baseURL: https://api.reccobeats.com/v1
-  properties:
-  - url: https://reccobeats.com/docs/apis/get-recommendation
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Generate track recommendations from seed tracks, artists, or albums.
-    The engine clusters a large dataset of songs, artists, and audio features and
-    returns tracks whose characteristics best match the seeds, with the result set
-    size controlled by the size parameter. Seeds accept ReccoBeats or Spotify IDs.
-- aid: reccobeats:reccobeats-artist-api
-  name: ReccoBeats Artist API
-  tags:
-  - Artists
-  - Discography
-  - Music Database
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/apis/get-artist-by-id
-  baseURL: https://api.reccobeats.com/v1
-  properties:
-  - url: https://reccobeats.com/docs/apis/get-artist-by-id
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Retrieve artist metadata and discography - get a single artist by ID,
-    fetch multiple artists in one request, and list an artist's albums or tracks.
-    Artist IDs can seed recommendations and resolve to the artist's catalog for
-    further browsing.
 - aid: reccobeats:reccobeats-album-api
   name: ReccoBeats Album API
-  tags:
-  - Albums
-  - Tracklists
-  - Music Database
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://reccobeats.com/docs/apis/get-albums
+  description: Album metadata and tracklists.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
   baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Album
   properties:
-  - url: https://reccobeats.com/docs/apis/get-albums
-    type: APIReference
-  - url: openapi/reccobeats-openapi.yml
-    type: OpenAPI
-  - url: collections/reccobeats.postman_collection.json
-    type: PostmanCollection
-  - url: collections/reccobeats.opencollection.json
-    type: OpenCollection
-  description: Retrieve album metadata and tracklists - get a single album by ID,
-    fetch multiple albums in one request, and list the tracks on an album. Album
-    IDs can seed recommendations and resolve to their constituent tracks for
-    audio-feature analysis.
+  - type: OpenAPI
+    url: openapi/reccobeats-album-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
+- aid: reccobeats:reccobeats-artist-api
+  name: ReccoBeats Artist API
+  description: Artist metadata and discography.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
+  baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Artist
+  properties:
+  - type: OpenAPI
+    url: openapi/reccobeats-artist-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
+- aid: reccobeats:reccobeats-audio-analysis-api
+  name: ReccoBeats Audio Analysis API
+  description: Extract audio features directly from an uploaded audio file.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
+  baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Audio Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/reccobeats-audio-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
+- aid: reccobeats:reccobeats-audio-features-api
+  name: ReccoBeats Audio Features API
+  description: Spotify-style audio features for a catalog track.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
+  baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Audio Features
+  properties:
+  - type: OpenAPI
+    url: openapi/reccobeats-audio-features-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
+- aid: reccobeats:reccobeats-recommendation-api
+  name: ReccoBeats Recommendation API
+  description: Track recommendations generated from seeds.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
+  baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Recommendation
+  properties:
+  - type: OpenAPI
+    url: openapi/reccobeats-recommendation-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
+- aid: reccobeats:reccobeats-track-api
+  name: ReccoBeats Track API
+  description: Track metadata lookup by ReccoBeats or Spotify ID.
+  humanURL: https://reccobeats.com/docs/apis/get-track-by-id
+  baseURL: https://api.reccobeats.com/v1
+  tags:
+  - Track
+  properties:
+  - type: OpenAPI
+    url: openapi/reccobeats-track-api-openapi.yml
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/introduction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-by-id
+  - type: PostmanCollection
+    url: collections/reccobeats.postman_collection.json
+  - type: OpenCollection
+    url: collections/reccobeats.opencollection.json
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-track-audio-features
+  - type: Documentation
+    url: https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/extract-audio-features
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-recommendation
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-artist-by-id
+  - type: APIReference
+    url: https://reccobeats.com/docs/apis/get-albums
 common:
 - type: AgenticAccess
   url: agentic-access/reccobeats-agentic-access.yml
