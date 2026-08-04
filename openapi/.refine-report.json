@@ -1,0 +1,24 @@
+{
+  "provider": "reccobeats",
+  "sources": [
+    "reccobeats-album-api-openapi.yml",
+    "reccobeats-artist-api-openapi.yml",
+    "reccobeats-audio-analysis-api-openapi.yml",
+    "reccobeats-audio-features-api-openapi.yml",
+    "reccobeats-recommendation-api-openapi.yml",
+    "reccobeats-track-api-openapi.yml"
+  ],
+  "outputs": [
+    "reccobeats-album-api-openapi.yml",
+    "reccobeats-artist-api-openapi.yml",
+    "reccobeats-audio-analysis-api-openapi.yml",
+    "reccobeats-audio-features-api-openapi.yml",
+    "reccobeats-recommendation-api-openapi.yml",
+    "reccobeats-track-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
