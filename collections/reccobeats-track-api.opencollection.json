@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats Album Track API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Track",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get multiple tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ReccoBeats UUIDs or Spotify IDs."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple tracks in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter."
+        },
+        {
+          "info": {
+            "name": "Get track detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the track."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single track by its ReccoBeats UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

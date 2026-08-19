@@ -1,0 +1,384 @@
+{
+  "item": [
+    {
+      "id": "87b6e4d5-f787-495d-9f17-570dd7e0c077",
+      "name": "Track",
+      "description": {
+        "content": "Track metadata lookup by ReccoBeats or Spotify ID.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ad90068-22e7-4854-aab2-c69597a635f3",
+          "name": "Get multiple tracks",
+          "request": {
+            "name": "Get multiple tracks",
+            "description": {
+              "content": "Retrieve metadata for multiple tracks in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of ReccoBeats UUIDs or Spotify IDs."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02dd9e91-ed9d-4d66-b028-9920a5d4597a",
+              "name": "A list of tracks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"string\",\n      \"trackTitle\": \"string\",\n      \"artists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        }\n      ],\n      \"durationMs\": 6057,\n      \"isrc\": \"string\",\n      \"ean\": \"string\",\n      \"upc\": \"string\",\n      \"href\": \"string\",\n      \"availableCountries\": \"string\",\n      \"popularity\": 5297\n    },\n    {\n      \"id\": \"string\",\n      \"trackTitle\": \"string\",\n      \"artists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        }\n      ],\n      \"durationMs\": 1179,\n      \"isrc\": \"string\",\n      \"ean\": \"string\",\n      \"upc\": \"string\",\n      \"href\": \"string\",\n      \"availableCountries\": \"string\",\n      \"popularity\": 1643\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5277e42d-5363-4e46-955e-a806d390ca35",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ce20239-6847-40dd-b7ec-276924d1cdff",
+              "name": "Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e650bba6-dfc6-4c19-a18b-fc35921c9e41",
+          "name": "Get track detail",
+          "request": {
+            "name": "Get track detail",
+            "description": {
+              "content": "Retrieve detailed metadata for a single track by its ReccoBeats UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ReccoBeats UUID of the track."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6648a227-b006-442a-a302-78b7c96cafb4",
+              "name": "The requested track.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"trackTitle\": \"string\",\n  \"artists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"href\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"href\": \"string\"\n    }\n  ],\n  \"durationMs\": 3820,\n  \"isrc\": \"string\",\n  \"ean\": \"string\",\n  \"upc\": \"string\",\n  \"href\": \"string\",\n  \"availableCountries\": \"string\",\n  \"popularity\": 1585\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2a8cb7e-1710-4fee-94c4-5f5af1ae7941",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03e4e822-24ab-4a36-9289-77f909ce0139",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a3048ae-990e-4a2f-9a1b-49adfc19f7bd",
+              "name": "Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.reccobeats.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "df6c9c9a-1aa1-4eb8-96e4-0d0159a434ee",
+    "name": "ReccoBeats Album Track API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.\n\nContact Support:\n Name: ReccoBeats",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats Album Audio Features API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audio Features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get track's audio features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/:id/audio-features",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the track."
+              }
+            ]
+          },
+          "docs": "Retrieve the Spotify-style audio features for a catalog track by its ReccoBeats UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

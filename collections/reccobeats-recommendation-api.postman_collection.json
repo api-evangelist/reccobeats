@@ -1,0 +1,348 @@
+{
+  "item": [
+    {
+      "id": "bbd179ee-3425-4dc4-af61-ccf0e840a927",
+      "name": "Recommendation",
+      "description": {
+        "content": "Track recommendations generated from seeds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c77a266f-9750-4f5f-a569-db5675cb2d66",
+          "name": "Track recommendation",
+          "request": {
+            "name": "Track recommendation",
+            "description": {
+              "content": "Generate track recommendations from one or more seeds (track, artist, or album IDs). The engine clusters songs, artists, and audio features and returns tracks whose characteristics best match the seeds. Optional audio-feature target parameters can be supplied to steer the results toward a desired sound and mood.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track",
+                "recommendation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "seeds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of seed IDs (ReccoBeats UUIDs or Spotify IDs) for tracks, artists, or albums."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Number of recommended tracks to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "acousticness",
+                  "value": "<float>",
+                  "description": "Target acousticness (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "danceability",
+                  "value": "<float>",
+                  "description": "Target danceability (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "energy",
+                  "value": "<float>",
+                  "description": "Target energy (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "instrumentalness",
+                  "value": "<float>",
+                  "description": "Target instrumentalness (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "liveness",
+                  "value": "<float>",
+                  "description": "Target liveness (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "speechiness",
+                  "value": "<float>",
+                  "description": "Target speechiness (0.0-1.0) to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "tempo",
+                  "value": "<float>",
+                  "description": "Target tempo in BPM to steer recommendations. Modeled."
+                },
+                {
+                  "disabled": false,
+                  "key": "valence",
+                  "value": "<float>",
+                  "description": "Target valence (0.0-1.0) to steer recommendations. Modeled."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2945c4e-a069-4baf-902c-6d8e3720ac74",
+              "name": "A list of recommended tracks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seeds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "acousticness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "danceability",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "energy",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "instrumentalness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "liveness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "speechiness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "tempo",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "valence",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"string\",\n      \"trackTitle\": \"string\",\n      \"artists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        }\n      ],\n      \"durationMs\": 900,\n      \"isrc\": \"string\",\n      \"ean\": \"string\",\n      \"upc\": \"string\",\n      \"href\": \"string\",\n      \"availableCountries\": \"string\",\n      \"popularity\": 236\n    },\n    {\n      \"id\": \"string\",\n      \"trackTitle\": \"string\",\n      \"artists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"href\": \"string\"\n        }\n      ],\n      \"durationMs\": 5243,\n      \"isrc\": \"string\",\n      \"ean\": \"string\",\n      \"upc\": \"string\",\n      \"href\": \"string\",\n      \"availableCountries\": \"string\",\n      \"popularity\": 1952\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac83ebd1-7041-41a4-9725-de3611574cf3",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seeds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "acousticness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "danceability",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "energy",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "instrumentalness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "liveness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "speechiness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "tempo",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "valence",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b99eed04-21b4-435c-8fd5-de2b622b8e0b",
+              "name": "Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seeds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "acousticness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "danceability",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "energy",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "instrumentalness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "liveness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "speechiness",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "tempo",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "valence",
+                      "value": "<float>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.reccobeats.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "82af7ee1-0269-455a-a44f-2ccb9dd741f1",
+    "name": "ReccoBeats Album Recommendation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.\n\nContact Support:\n Name: ReccoBeats",
+      "type": "text/plain"
+    }
+  }
+}

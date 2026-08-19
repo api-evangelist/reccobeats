@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats Album Artist API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get multiple artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ReccoBeats UUIDs or Spotify IDs."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple artists in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter."
+        },
+        {
+          "info": {
+            "name": "Search artist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/search",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The artist name (or partial name) to search for."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              }
+            ]
+          },
+          "docs": "Search the ReccoBeats database for artists by name."
+        },
+        {
+          "info": {
+            "name": "Get artist detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the artist."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single artist by ReccoBeats UUID."
+        },
+        {
+          "info": {
+            "name": "Get artist's albums",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id/album",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the artist."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              }
+            ]
+          },
+          "docs": "List the albums for a given artist, identified by ReccoBeats UUID."
+        },
+        {
+          "info": {
+            "name": "Get artist's tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/artist/:id/track",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the artist."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              }
+            ]
+          },
+          "docs": "List the tracks for a given artist, identified by ReccoBeats UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

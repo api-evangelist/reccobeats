@@ -1,0 +1,239 @@
+{
+  "item": [
+    {
+      "id": "5dd0e5c8-29c8-4cc2-8b0a-72cbcf9c0985",
+      "name": "Audio Features",
+      "description": {
+        "content": "Spotify-style audio features for a catalog track.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17bd67de-ea28-4b70-a534-c041f31d2de5",
+          "name": "Get track's audio features",
+          "request": {
+            "name": "Get track's audio features",
+            "description": {
+              "content": "Retrieve the Spotify-style audio features for a catalog track by its ReccoBeats UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track",
+                ":id",
+                "audio-features"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ReccoBeats UUID of the track."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0515eb91-bc8c-4ace-beff-2e8a64a643f7",
+              "name": "The audio features for the track.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id",
+                    "audio-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"acousticness\": 9368.669173972297,\n  \"danceability\": 4211.210217195174,\n  \"energy\": 6699.5026205410095,\n  \"instrumentalness\": 5141.249459158838,\n  \"liveness\": 1404.9272889207841,\n  \"loudness\": 2299.2147741495373,\n  \"speechiness\": 2235.487369580396,\n  \"tempo\": 4880.887287356705,\n  \"valence\": 372.7506753817145\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76deaedc-033e-4cce-bfed-2f202e3fa3b1",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id",
+                    "audio-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f646ccc3-3513-4c33-bbf5-5d535e4c08ad",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id",
+                    "audio-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e655aac-2f31-4081-8156-db9ffa97cdc7",
+              "name": "Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track",
+                    ":id",
+                    "audio-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ReccoBeats UUID of the track."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.reccobeats.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3cc5153b-c384-49f2-b012-be84dc75adc2",
+    "name": "ReccoBeats Album Audio Features API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.\n\nContact Support:\n Name: ReccoBeats",
+      "type": "text/plain"
+    }
+  }
+}

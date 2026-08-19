@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats Album API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Album",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get multiple albums",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of ReccoBeats UUIDs or Spotify IDs."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for multiple albums in one request. Accepts a list of ReccoBeats UUIDs or Spotify IDs via the ids query parameter."
+        },
+        {
+          "info": {
+            "name": "Search album",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/search",
+            "params": [
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The album title (or partial title) to search for."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              }
+            ]
+          },
+          "docs": "Search the ReccoBeats database for albums by title."
+        },
+        {
+          "info": {
+            "name": "Get album detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the album."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed metadata for a single album by ReccoBeats UUID."
+        },
+        {
+          "info": {
+            "name": "Get album's tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/album/:id/track",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ReccoBeats UUID of the album."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              }
+            ]
+          },
+          "docs": "List the tracks on a given album, identified by ReccoBeats UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

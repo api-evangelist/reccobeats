@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ReccoBeats Album Recommendation API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reccobeats.com/v1/track/recommendation",
+            "params": [
+              {
+                "name": "seeds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of seed IDs (ReccoBeats UUIDs or Spotify IDs) for tracks, artists, or albums."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of recommended tracks to return."
+              },
+              {
+                "name": "acousticness",
+                "value": "",
+                "type": "query",
+                "description": "Target acousticness (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "danceability",
+                "value": "",
+                "type": "query",
+                "description": "Target danceability (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "energy",
+                "value": "",
+                "type": "query",
+                "description": "Target energy (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "instrumentalness",
+                "value": "",
+                "type": "query",
+                "description": "Target instrumentalness (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "liveness",
+                "value": "",
+                "type": "query",
+                "description": "Target liveness (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "speechiness",
+                "value": "",
+                "type": "query",
+                "description": "Target speechiness (0.0-1.0) to steer recommendations. Modeled."
+              },
+              {
+                "name": "tempo",
+                "value": "",
+                "type": "query",
+                "description": "Target tempo in BPM to steer recommendations. Modeled."
+              },
+              {
+                "name": "valence",
+                "value": "",
+                "type": "query",
+                "description": "Target valence (0.0-1.0) to steer recommendations. Modeled."
+              }
+            ]
+          },
+          "docs": "Generate track recommendations from one or more seeds (track, artist, or album IDs). The engine clusters songs, artists, and audio features and returns tracks whose characteristics best match the seeds. Optional audio-feature target parameters can be supplied to steer the results toward a desired sound and mood."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
