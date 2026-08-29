@@ -1,0 +1,26 @@
+slug: reccobeats
+provider: ReccoBeats
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Recommendation
+  spec_file: reccobeats-recommendation-api-openapi.yml
+  capability_id: BC-3770.40
+  capability_id_l1: BC-3770
+  capability_name: Content Recommendation Modelling
+  confidence: 0.8
+  evidence: GET /track/recommendation getRecommendation "Track recommendation"; "a machine-learning recommendation
+    engine that suggests tracks from seed tracks, artists, or albums"
+  reason: The operation returns machine-learning generated content recommendations from seed content,
+    which is precisely Content Recommendation Modelling. Slight ambiguity only in that the vendor exposes
+    the model rather than operating consumer surfaces.

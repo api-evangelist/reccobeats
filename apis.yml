@@ -229,6 +229,9 @@ apis:
   - type: APIReference
     url: https://reccobeats.com/docs/apis/get-albums
 common:
+- type: CapabilityMap
+  url: capabilities/reccobeats-capability-edges.yml
+  name: ReccoBeats Business Capability Map
 - type: AgenticAccess
   url: agentic-access/reccobeats-agentic-access.yml
 - type: DomainSecurity
