@@ -10,6 +10,18 @@ description: ReccoBeats is a free music recommendation and database API service.
   speechiness, tempo, and valence - either for a catalog track by ID or directly
   from an uploaded audio file. Resources can be addressed by ReccoBeats UUID or by
   Spotify ID, and the API requires no API key or authentication.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open
