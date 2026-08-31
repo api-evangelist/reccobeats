@@ -82,7 +82,7 @@ apis:
   humanURL: https://reccobeats.com/docs/apis/get-track-by-id
   baseURL: https://api.reccobeats.com/v1
   tags:
-  - Artists
+  - Artist
   tags_raw:
   - Artist
   properties:
