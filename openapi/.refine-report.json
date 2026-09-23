@@ -1,12 +1,7 @@
 {
   "provider": "reccobeats",
   "sources": [
-    "reccobeats-album-api-openapi.yml",
-    "reccobeats-artist-api-openapi.yml",
-    "reccobeats-audio-analysis-api-openapi.yml",
-    "reccobeats-audio-features-api-openapi.yml",
-    "reccobeats-recommendation-api-openapi.yml",
-    "reccobeats-track-api-openapi.yml"
+    "_original/reccobeats-openapi.yml"
   ],
   "outputs": [
     "reccobeats-album-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "reccobeats-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "reccobeats-album-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reccobeats-artist-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reccobeats-audio-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reccobeats-audio-features-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reccobeats-recommendation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reccobeats-track-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

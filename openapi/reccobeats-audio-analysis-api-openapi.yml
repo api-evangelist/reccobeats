@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ReccoBeats Album Audio Analysis API
-  description: ReccoBeats is a free music recommendation and database API. It serves track, artist, and album metadata from a database of millions of tracks, generates track recommendations from seed tracks/artists/albums, and returns Spotify-style audio features (acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, valence) either for a catalog track by ID or extracted directly from an uploaded audio file. Resources are addressed by a ReccoBeats UUID (v4) or by a Spotify Base-62 ID. No API key or authentication is required. The API enforces internal rate limits and returns HTTP 429 with a Retry-After header when throttled.
+  title: ReccoBeats Audio Analysis API
+  description: ReccoBeats is a free music recommendation and database API.
   version: '1.0'
   contact:
     name: ReccoBeats
@@ -46,10 +46,10 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
-    BadRequest:
-      description: The request was malformed or missing required parameters.
     TooManyRequests:
       description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
   schemas:
     AudioFeatures:
       type: object
