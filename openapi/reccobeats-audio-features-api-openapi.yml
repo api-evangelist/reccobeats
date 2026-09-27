@@ -36,13 +36,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    NotFound:
-      description: The requested resource was not found.
-    TooManyRequests:
-      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
   schemas:
     AudioFeatures:
       type: object
@@ -87,6 +80,13 @@ components:
           type: number
           format: float
           description: Musical positivity / happiness (0.0-1.0).
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
   parameters:
     TrackId:
       name: id

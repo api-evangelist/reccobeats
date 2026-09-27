@@ -107,11 +107,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    TooManyRequests:
-      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
   schemas:
     Track:
       type: object
@@ -151,3 +146,8 @@ components:
           type: string
         href:
           type: string
+  responses:
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
