@@ -66,7 +66,25 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
+    Artist:
+      type: object
+      description: An artist in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the artist.
+        name:
+          type: string
+        href:
+          type: string
     Track:
       type: object
       description: A track in the ReccoBeats database.
@@ -94,24 +112,6 @@ components:
           type: string
         popularity:
           type: integer
-    Artist:
-      type: object
-      description: An artist in the ReccoBeats database.
-      properties:
-        id:
-          type: string
-          description: The ReccoBeats UUID for the artist.
-        name:
-          type: string
-        href:
-          type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    TooManyRequests:
-      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
   parameters:
     TrackId:
       name: id
