@@ -69,10 +69,18 @@ components:
   responses:
     TooManyRequests:
       description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
-    BadRequest:
-      description: The request was malformed or missing required parameters.
     NotFound:
       description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+  parameters:
+    TrackId:
+      name: id
+      in: path
+      required: true
+      description: The ReccoBeats UUID of the track.
+      schema:
+        type: string
   schemas:
     Artist:
       type: object
@@ -112,11 +120,3 @@ components:
           type: string
         popularity:
           type: integer
-  parameters:
-    TrackId:
-      name: id
-      in: path
-      required: true
-      description: The ReccoBeats UUID of the track.
-      schema:
-        type: string

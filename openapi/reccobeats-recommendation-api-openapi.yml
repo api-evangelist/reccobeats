@@ -108,17 +108,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    Artist:
-      type: object
-      description: An artist in the ReccoBeats database.
-      properties:
-        id:
-          type: string
-          description: The ReccoBeats UUID for the artist.
-        name:
-          type: string
-        href:
-          type: string
     Track:
       type: object
       description: A track in the ReccoBeats database.
@@ -146,6 +135,17 @@ components:
           type: string
         popularity:
           type: integer
+    Artist:
+      type: object
+      description: An artist in the ReccoBeats database.
+      properties:
+        id:
+          type: string
+          description: The ReccoBeats UUID for the artist.
+        name:
+          type: string
+        href:
+          type: string
   responses:
     TooManyRequests:
       description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.

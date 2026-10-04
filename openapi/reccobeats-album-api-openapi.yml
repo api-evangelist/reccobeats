@@ -127,7 +127,21 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
   parameters:
+    AlbumId:
+      name: id
+      in: path
+      required: true
+      description: The ReccoBeats UUID of the album.
+      schema:
+        type: string
     Size:
       name: size
       in: query
@@ -136,13 +150,6 @@ components:
       schema:
         type: integer
         default: 20
-    AlbumId:
-      name: id
-      in: path
-      required: true
-      description: The ReccoBeats UUID of the album.
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -151,13 +158,6 @@ components:
       schema:
         type: integer
         default: 0
-  responses:
-    TooManyRequests:
-      description: Rate limit exceeded. Inspect the Retry-After header to determine how long to wait before retrying.
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    NotFound:
-      description: The requested resource was not found.
   schemas:
     Album:
       type: object
