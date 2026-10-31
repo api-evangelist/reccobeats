@@ -1,4 +1,4 @@
-# ReccoBeats (reccobeats)
+# ReccoBeats
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,156 +66,124 @@
 
 ReccoBeats is a free music recommendation and database API service. It exposes a REST API over a database of millions of tracks, artists, and albums, and a machine-learning recommendation engine that suggests tracks from seed tracks, artists, or albums. ReccoBeats also extracts Spotify-style audio features - acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, and valence - either for a catalog track by ID or directly from an uploaded audio file. Resources can be addressed by ReccoBeats UUID or by Spotify ID, and the API requires no API key or authentication.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/reccobeats/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/reccobeats/refs/heads/main/apis.yml)
+**Areas:** Music · Recommendations · Audio Features · Audio Analysis · Music Database · Spotify Alternative
 
-## Tags
+## ReccoBeats on APIs.io
 
-- Music
-- Recommendations
-- Audio Features
-- Audio Analysis
-- Music Database
-- Spotify Alternative
+Everything profiled for ReccoBeats is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/reccobeats/](https://apis.io/providers/reccobeats/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+- [ReccoBeats Album API](https://apis.io/apis/reccobeats/reccobeats-album-api/) — Album metadata and tracklists.
+- [ReccoBeats Artist API](https://apis.io/apis/reccobeats/reccobeats-artist-api/) — Artist metadata and discography.
+- [ReccoBeats Audio Analysis API](https://apis.io/apis/reccobeats/reccobeats-audio-analysis-api/) — Extract audio features directly from an uploaded audio file.
+- [ReccoBeats Audio Features API](https://apis.io/apis/reccobeats/reccobeats-audio-features-api/) — Spotify-style audio features for a catalog track.
+- [ReccoBeats Recommendation API](https://apis.io/apis/reccobeats/reccobeats-recommendation-api/) — Track recommendations generated from seeds.
+- [ReccoBeats Track API](https://apis.io/apis/reccobeats/reccobeats-track-api/) — Track metadata lookup by ReccoBeats or Spotify ID.
 
-## APIs
+### Published properties
 
-### ReccoBeats Track API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Retrieve track metadata from the ReccoBeats music database - fetch a single track by its ReccoBeats UUID, or look up multiple tracks in one request by ReccoBeats or Spotify IDs. Tracks are the primary resource used as seeds for recommendations and as the subject of audio-feature lookups.
+#### Agentic access (1)
 
-- **Human URL:** [https://reccobeats.com/docs/apis/get-track-by-id](https://reccobeats.com/docs/apis/get-track-by-id)
-- **Base URL:** `https://api.reccobeats.com/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Reccobeats Agentic Access](https://apis.io/agentic-access/reccobeats/reccobeats-agentic-access/)
 
-- Tracks
-- Metadata
-- Music Database
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://reccobeats.com/docs/documentation/introduction)
-- [API Reference](https://reccobeats.com/docs/apis/get-track-by-id)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [ReccoBeats API](https://apis.io/collections/reccobeats/open-reccobeats/)
+- [ReccoBeats Album API](https://apis.io/collections/reccobeats/open-reccobeats-album-api/)
+- [ReccoBeats Album Artist API](https://apis.io/collections/reccobeats/open-reccobeats-artist-api/)
+- [ReccoBeats Album Audio Analysis API](https://apis.io/collections/reccobeats/open-reccobeats-audio-analysis-api/)
+- [ReccoBeats Album Audio Features API](https://apis.io/collections/reccobeats/open-reccobeats-audio-features-api/)
+- [ReccoBeats Album Recommendation API](https://apis.io/collections/reccobeats/open-reccobeats-recommendation-api/)
+- [ReccoBeats Album Track API](https://apis.io/collections/reccobeats/open-reccobeats-track-api/)
 
-### ReccoBeats Audio Features API
+#### Security (1)
 
-Get the Spotify-style audio features for a catalog track by ID - acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, and valence - as numeric characteristics describing the track's sound and mood. A drop-in alternative to Spotify's deprecated audio features endpoint.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://reccobeats.com/docs/apis/get-track-audio-features](https://reccobeats.com/docs/apis/get-track-audio-features)
-- **Base URL:** `https://api.reccobeats.com/v1`
+- [Reccobeats Domain Security](https://apis.io/security/reccobeats/reccobeats-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Audio Features
-- Danceability
-- Energy
-- Valence
+Published plans, tiers and prices.
 
-#### Properties
+- [Reccobeats Plans Pricing](https://apis.io/plans/reccobeats/reccobeats-plans-pricing/)
 
-- [API Reference](https://reccobeats.com/docs/apis/get-track-audio-features)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### ReccoBeats Audio Analysis API
+Published request limits.
 
-Extract audio features directly from an uploaded audio file (MP3, OGG, WAV, AIFF; up to 5 MB, first 30 seconds analyzed) via a multipart POST. Returns the same nine-dimension feature vector as the catalog audio-features endpoint, for tracks that are not in the ReccoBeats database.
+- [Reccobeats Rate Limits](https://apis.io/rate-limits/reccobeats/reccobeats-rate-limits/)
 
-- **Human URL:** [https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction](https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction)
-- **Base URL:** `https://api.reccobeats.com/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Audio Analysis
-- Feature Extraction
-- File Upload
+- [Reccobeats Finops](https://apis.io/finops/reccobeats/reccobeats-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://reccobeats.com/docs/documentation/Analysis/audio-features-extraction)
-- [API Reference](https://reccobeats.com/docs/apis/extract-audio-features)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ReccoBeats Recommendation API
-
-Generate track recommendations from seed tracks, artists, or albums. The engine clusters a large dataset of songs, artists, and audio features and returns tracks whose characteristics best match the seeds, with the result set size controlled by the size parameter. Seeds accept ReccoBeats or Spotify IDs.
-
-- **Human URL:** [https://reccobeats.com/docs/apis/get-recommendation](https://reccobeats.com/docs/apis/get-recommendation)
-- **Base URL:** `https://api.reccobeats.com/v1`
-
-#### Tags
-
-- Recommendations
-- Seeds
-- Discovery
-
-#### Properties
-
-- [API Reference](https://reccobeats.com/docs/apis/get-recommendation)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ReccoBeats Artist API
-
-Retrieve artist metadata and discography - get a single artist by ID, fetch multiple artists in one request, and list an artist's albums or tracks. Artist IDs can seed recommendations and resolve to the artist's catalog for further browsing.
-
-- **Human URL:** [https://reccobeats.com/docs/apis/get-artist-by-id](https://reccobeats.com/docs/apis/get-artist-by-id)
-- **Base URL:** `https://api.reccobeats.com/v1`
-
-#### Tags
-
-- Artists
-- Discography
-- Music Database
-
-#### Properties
-
-- [API Reference](https://reccobeats.com/docs/apis/get-artist-by-id)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ReccoBeats Album API
-
-Retrieve album metadata and tracklists - get a single album by ID, fetch multiple albums in one request, and list the tracks on an album. Album IDs can seed recommendations and resolve to their constituent tracks for audio-feature analysis.
-
-- **Human URL:** [https://reccobeats.com/docs/apis/get-albums](https://reccobeats.com/docs/apis/get-albums)
-- **Base URL:** `https://api.reccobeats.com/v1`
-
-#### Tags
-
-- Albums
-- Tracklists
-- Music Database
-
-#### Properties
-
-- [API Reference](https://reccobeats.com/docs/apis/get-albums)
-- [OpenAPI](openapi/reccobeats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/reccobeats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/reccobeats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://reccobeats.com)
 - [Documentation](https://reccobeats.com/docs/documentation/introduction)
-- [Plans](plans/reccobeats-plans-pricing.yml)
-- [Rate Limits](rate-limits/reccobeats-rate-limits.yml)
-- [Fin Ops](finops/reccobeats-finops.yml)
+- [Blog](https://reccobeats.com/blog/rss.xml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 22.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 20.2 |
+| Access clarity | 5.3 |
+
+**Agent readiness 15.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/reccobeats/](https://apis.io/providers/reccobeats/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ReccoBeats: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/reccobeats/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
